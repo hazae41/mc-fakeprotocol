@@ -1,0 +1,13 @@
+priority: "high"
+# The priority of the plugin over others motd plugins
+# Can be highest, high, normal, low, lowest
+
+allowed: [107, 108, 109, 110, 210, 315, 316, 335, 338, 340]
+# These protocols will see a green status
+
+name: "MyOwnProxy 1.9 - 1.12.2"
+# Other protocols will see a red status with this message
+
+protocols: # These messages are specific to a protocol
+  393: "We don't support 1.13 yet!"
+  22: "Are you still in 2011?"

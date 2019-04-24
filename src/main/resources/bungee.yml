@@ -1,0 +1,4 @@
+name: FakeProtocol
+version: @version@
+main: hazae41.minecraft.fakeprotocol.Plugin
+author: hazae41
