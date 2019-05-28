@@ -43,12 +43,16 @@ object Config: ConfigFile("config"){
     val protocols get() = config.getSection("protocols")!!
 }
 
-fun Plugin.process(e: ProxyPingEvent) = e.response?.version?.apply{
+fun Plugin.process(e: ProxyPingEvent) = e.response?.version?.also{
     val version = e.connection.version
-    if(version in Config.allowed) protocol = version
+    if(version in Config.allowed) {
+        it.protocol = version
+    }
     else {
-        name = placeholders(Config.protocols.getString(version.toString()) ?: Config.name)
-        protocol = 0
+        var name = Config.protocols.getString(version.toString())
+        if(name.isBlank()) name = Config.name
+        it.name = placeholders(name)
+        it.protocol = 0
     }
 }
 
