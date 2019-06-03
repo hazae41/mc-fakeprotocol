@@ -8,26 +8,10 @@ import net.md_5.bungee.api.event.ProxyPingEvent
 import net.md_5.bungee.event.EventPriority.*
 
 class Plugin: BungeePlugin() {
-
     override fun onEnable() {
-        update(16527)
+        update(67965)
         init(Config)
         listen()
-
-        command("fakeprotocol", "protoc.reload", "fprotocol"){
-            args -> catch<Exception>(::msg){
-                if (!hasPermission("fakeprotocol.reload"))
-                throw ex("&cYou don't have permission.")
-
-                when(args.getOrNull(0)?.lowerCase){
-                    "reload", "r" -> {
-                        Config.reload()
-                        msg("&7Config reloaded")
-                    }
-                    else -> msg("&7/fakeprotocol <reload>")
-                }
-            }
-        }
     }
 }
 
@@ -36,7 +20,7 @@ fun Plugin.placeholders(s: String) = s
     .replace("%online%", proxy.onlineCount.toString())
     .replace("&", "§")
 
-object Config: ConfigFile("config"){
+object Config: PluginConfigFile("config"){
     val allowed by intList("allowed")
     val priority by string("priority", "highest")
     val name by string("name")
